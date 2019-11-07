@@ -17,7 +17,12 @@ Auth::routes();
 
 Route::get('/', 'PostsController@index')->name('home');
 
-Route::group(['prefix'=>'admin', 'namespace' => 'admin', 'middleware' => 'admin'], function()
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=>['auth', 'admin']], function()
 {
+    Route::get('/home','HomeController@index');
     Route::resource('user','UsersController');
 });
+
+
+
